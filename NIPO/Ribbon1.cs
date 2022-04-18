@@ -4,24 +4,55 @@ using System.Linq;
 using System.Text;
 using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.IO;
 
 namespace NIPO
 {
     public partial class Ribbon1
     {
+
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, RibbonControlEventArgs e)
+        private void button3_Click(object sender, RibbonControlEventArgs e)
         {
-            MessageBox.Show("Clicked");
+            try
+            {
+                var ds = new DataSource();
+                var records = ds.ToList();
+                if (records.Count() == 0)
+                {
+                    MessageBox.Show(String.Format("データなし！"));
+                    return;
+                }
+
+                var file = Path.Combine(DesktopDirectory(), FileNameToSave());
+                var csv = new CsvFile(records)
+                {
+                    Name = file
+                };
+                csv.Save();
+
+                MessageBox.Show(String.Format("完了！\n{0}", file));
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void button2_Click(object sender, RibbonControlEventArgs e)
+        private static string FileNameToSave()
         {
-            MessageBox.Show("Clicked");
+            var wb = Globals.ThisAddIn.Application.ActiveWorkbook;
+            return String.Format("{0}.{1}", wb.Name.Split(new char[] { '.' }).First(), CsvFile.Extension);
+        }
+
+        private static string DesktopDirectory()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         }
     }
 }

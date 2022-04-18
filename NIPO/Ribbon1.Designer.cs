@@ -34,13 +34,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl1 = this.Factory.CreateRibbonDialogLauncher();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button1 = this.Factory.CreateRibbonButton();
-            this.menu1 = this.Factory.CreateRibbonMenu();
-            this.button2 = this.Factory.CreateRibbonButton();
+            this.button3 = this.Factory.CreateRibbonButton();
+            this.box1 = this.Factory.CreateRibbonBox();
+            this.label1 = this.Factory.CreateRibbonLabel();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
+            this.box1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // tab1
             // 
@@ -52,30 +55,31 @@
             // 
             // group1
             // 
-            this.group1.Items.Add(this.menu1);
-            this.group1.Label = "CSV生成";
+            ribbonDialogLauncherImpl1.Visible = false;
+            this.group1.DialogLauncher = ribbonDialogLauncherImpl1;
+            this.group1.Items.Add(this.box1);
+            this.group1.Label = "ｵｰﾀﾞｰｼｰﾄ";
             this.group1.Name = "group1";
             // 
-            // button1
+            // button3
             // 
-            this.button1.Label = "投入表";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            this.button3.Label = "投入表";
+            this.button3.Name = "button3";
+            this.button3.OfficeImageId = "ExportTextFile";
+            this.button3.ShowImage = true;
+            this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
-            // menu1
+            // box1
             // 
-            this.menu1.Items.Add(this.button1);
-            this.menu1.Items.Add(this.button2);
-            this.menu1.Label = "ｵｰﾀﾞｰｼｰﾄ";
-            this.menu1.Name = "menu1";
+            this.box1.BoxStyle = Microsoft.Office.Tools.Ribbon.RibbonBoxStyle.Vertical;
+            this.box1.Items.Add(this.label1);
+            this.box1.Items.Add(this.button3);
+            this.box1.Name = "box1";
             // 
-            // button2
+            // label1
             // 
-            this.button2.Label = "商品ﾏｽﾀ";
-            this.button2.Name = "button2";
-            this.button2.ShowImage = true;
-            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
+            this.label1.Label = "CSV変換";
+            this.label1.Name = "label1";
             // 
             // Ribbon1
             // 
@@ -87,6 +91,9 @@
             this.tab1.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
+            this.box1.ResumeLayout(false);
+            this.box1.PerformLayout();
+            this.ResumeLayout(false);
 
         }
 
@@ -94,9 +101,9 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonBox box1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonLabel label1;
     }
 
     partial class ThisRibbonCollection

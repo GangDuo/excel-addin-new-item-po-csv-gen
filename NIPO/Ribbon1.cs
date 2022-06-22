@@ -29,18 +29,17 @@ namespace NIPO
                     return;
                 }
 
-                var model = new List<Models.DeliveryDatePicker>
-                {
-                    new Models.DeliveryDatePicker("yyyy/mm/dd", true),
-                    new Models.DeliveryDatePicker("yyyy/mm/dd", true),
-                    new Models.DeliveryDatePicker("yyyy/mm/dd", false)
-                };
+                var model = records.Select(record => record.店舗入荷予定日付)
+                    .Distinct()
+                    .OrderBy(x => x.Value)
+                    .Select(x => new Models.DeliveryDatePicker(x, false));
+
                 var v = new Views.DeliveryDatePickerForm(model);
                 if(DialogResult.Cancel == v.ShowDialog())
                 {
                     return;
                 }
-                
+
                 var file = Path.Combine(DesktopDirectory(), FileNameToSave());
                 var csv = new CsvFile(records)
                 {

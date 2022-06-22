@@ -11,7 +11,7 @@ namespace NIPO.Views
 {
     public partial class DeliveryDatePickerForm : Form
     {
-        public DeliveryDatePickerForm(List<Models.DeliveryDatePicker> model)
+        public DeliveryDatePickerForm(IEnumerable<Models.DeliveryDatePicker> model)
         {
             InitializeComponent();
 

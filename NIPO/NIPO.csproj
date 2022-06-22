@@ -168,6 +168,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\DeliveryDatePicker.cs" />
     <Compile Include="Views\DeliveryDatePickerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +187,9 @@
     </Compile>
     <EmbeddedResource Include="Ribbon1.resx">
       <DependentUpon>Ribbon1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeliveryDatePickerForm.resx">
+      <DependentUpon>DeliveryDatePickerForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="NIPO_TemporaryKey.pfx" />
     <None Include="packages.config" />

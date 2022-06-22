@@ -29,6 +29,18 @@ namespace NIPO
                     return;
                 }
 
+                var model = new List<Models.DeliveryDatePicker>
+                {
+                    new Models.DeliveryDatePicker("yyyy/mm/dd", true),
+                    new Models.DeliveryDatePicker("yyyy/mm/dd", true),
+                    new Models.DeliveryDatePicker("yyyy/mm/dd", false)
+                };
+                var v = new Views.DeliveryDatePickerForm(model);
+                if(DialogResult.Cancel == v.ShowDialog())
+                {
+                    return;
+                }
+                
                 var file = Path.Combine(DesktopDirectory(), FileNameToSave());
                 var csv = new CsvFile(records)
                 {

@@ -27,5 +27,11 @@ namespace NIPO.Views
                 dataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
     }
 }

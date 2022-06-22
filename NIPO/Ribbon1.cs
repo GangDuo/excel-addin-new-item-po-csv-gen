@@ -32,16 +32,19 @@ namespace NIPO
                 var model = records.Select(record => record.店舗入荷予定日付)
                     .Distinct()
                     .OrderBy(x => x.Value)
-                    .Select(x => new Models.DeliveryDatePicker(x, false));
+                    .Select(x => new Models.DeliveryDatePicker(x, false))
+                    .ToList();
 
                 var v = new Views.DeliveryDatePickerForm(model);
                 if(DialogResult.Cancel == v.ShowDialog())
                 {
                     return;
                 }
+                var tasks = model.Where(x => x.IsEnabled).Select(x => x.Value).ToList();
+                var orders = records.Where(o => tasks.Contains(o.店舗入荷予定日付));
 
                 var file = Path.Combine(DesktopDirectory(), FileNameToSave());
-                var csv = new CsvFile(records)
+                var csv = new CsvFile(orders)
                 {
                     Name = file
                 };

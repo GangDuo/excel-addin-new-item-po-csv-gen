@@ -21,12 +21,7 @@ namespace NIPO
         {
             try
             {
-                var ds = new DataSource();
-                var records = ds.ToList();
-                if (records.Count() == 0)
-                {
-                    throw new Exception("データなし！");
-                }
+                IEnumerable<Order> records = DataSourceAsList();
 
                 var model = records.Select(record => record.店舗入荷予定日付)
                     .Distinct()
@@ -35,7 +30,7 @@ namespace NIPO
                     .ToList();
 
                 var v = new Views.DeliveryDatePickerForm(model);
-                if(DialogResult.Cancel == v.ShowDialog())
+                if (DialogResult.Cancel == v.ShowDialog())
                 {
                     return;
                 }
@@ -59,6 +54,18 @@ namespace NIPO
             {
                 MessageBox.Show(err.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private static IEnumerable<Order> DataSourceAsList()
+        {
+            var ds = new DataSource();
+            var records = ds.ToList();
+            if (records.Count() == 0)
+            {
+                throw new Exception("データなし！");
+            }
+
+            return records;
         }
 
         private static string FileNameToSave()

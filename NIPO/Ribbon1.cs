@@ -71,5 +71,18 @@ namespace NIPO
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         }
+
+        private void button1_Click(object sender, RibbonControlEventArgs e)
+        {
+            try
+            {
+                throw new Exception("not support");
+            }
+            catch (Exception err)
+            {
+
+                MessageBox.Show(err.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

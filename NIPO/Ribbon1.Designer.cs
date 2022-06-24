@@ -76,6 +76,7 @@
             this.button1.Name = "button1";
             this.button1.OfficeImageId = "GroupXml";
             this.button1.ShowImage = true;
+            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
             // box1
             // 

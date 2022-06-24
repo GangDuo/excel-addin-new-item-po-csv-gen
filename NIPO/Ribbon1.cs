@@ -6,6 +6,7 @@ using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Data;
 
 namespace NIPO
 {
@@ -21,12 +22,7 @@ namespace NIPO
         {
             try
             {
-                var ds = new DataSource();
-                var records = ds.ToList();
-                if (records.Count() == 0)
-                {
-                    throw new Exception("データなし！");
-                }
+                IEnumerable<Order> records = DataSourceAsList();
 
                 var model = records.Select(record => record.店舗入荷予定日付)
                     .Distinct()
@@ -35,7 +31,7 @@ namespace NIPO
                     .ToList();
 
                 var v = new Views.DeliveryDatePickerForm(model);
-                if(DialogResult.Cancel == v.ShowDialog())
+                if (DialogResult.Cancel == v.ShowDialog())
                 {
                     return;
                 }
@@ -61,6 +57,18 @@ namespace NIPO
             }
         }
 
+        private static IEnumerable<Order> DataSourceAsList()
+        {
+            var ds = new DataSource();
+            var records = ds.ToList();
+            if (records.Count() == 0)
+            {
+                throw new Exception("データなし！");
+            }
+
+            return records;
+        }
+
         private static string FileNameToSave()
         {
             var wb = Globals.ThisAddIn.Application.ActiveWorkbook;
@@ -70,6 +78,33 @@ namespace NIPO
         private static string DesktopDirectory()
         {
             return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+        }
+
+        private void button1_Click(object sender, RibbonControlEventArgs e)
+        {
+            try
+            {
+                IEnumerable<Order> records = DataSourceAsList();
+
+                var dt = new DataTable();
+                dt.Columns.Add("展開項目", Type.GetType("System.String"));
+                foreach (var x in records.Select(record => record.展開項目).Distinct())
+                {
+                    var row = dt.NewRow();
+                    row[0] = x;
+                    dt.Rows.Add(row);
+                }
+                var v = new Views.NoteForm(dt);
+                if (DialogResult.Cancel == v.ShowDialog())
+                {
+                    return;
+                }
+            }
+            catch (Exception err)
+            {
+
+                MessageBox.Show(err.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

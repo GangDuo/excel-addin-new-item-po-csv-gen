@@ -27,7 +27,7 @@ namespace NIPO
                 var model = records.Select(record => record.店舗入荷予定日付)
                     .Distinct()
                     .OrderBy(x => x.Value)
-                    .Select(x => new Models.DeliveryDatePicker(x, false))
+                    .Select(x => new Models.DeliveryDatePicker(x, true))
                     .ToList();
 
                 var v = new Views.DeliveryDatePickerForm(model);

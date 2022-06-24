@@ -76,7 +76,11 @@ namespace NIPO
         {
             try
             {
-                throw new Exception("not support");
+                var v = new Views.NoteForm();
+                if (DialogResult.Cancel == v.ShowDialog())
+                {
+                    return;
+                }
             }
             catch (Exception err)
             {

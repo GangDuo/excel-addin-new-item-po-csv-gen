@@ -30,6 +30,10 @@ namespace NIPO
                 }
 
                 var 店舗入荷予定日付 = sheet.Cells[row, 34].Value;
+                if (店舗入荷予定日付 == null )
+                {
+                    continue;
+                }
                 var 物流入荷予定日付 = sheet.Cells[row, 33].Value;
                 var 掛計上日付 = 物流入荷予定日付;
                 var 展開項目 = sheet.Cells[row, 38].Value;

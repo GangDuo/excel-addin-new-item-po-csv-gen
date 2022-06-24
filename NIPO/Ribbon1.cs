@@ -6,6 +6,7 @@ using Microsoft.Office.Tools.Ribbon;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Data;
 
 namespace NIPO
 {
@@ -83,7 +84,17 @@ namespace NIPO
         {
             try
             {
-                var v = new Views.NoteForm();
+                IEnumerable<Order> records = DataSourceAsList();
+
+                var dt = new DataTable();
+                dt.Columns.Add("展開項目", Type.GetType("System.String"));
+                foreach (var x in records.Select(record => record.展開項目).Distinct())
+                {
+                    var row = dt.NewRow();
+                    row[0] = x;
+                    dt.Rows.Add(row);
+                }
+                var v = new Views.NoteForm(dt);
                 if (DialogResult.Cancel == v.ShowDialog())
                 {
                     return;

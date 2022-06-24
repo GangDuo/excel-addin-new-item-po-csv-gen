@@ -12,9 +12,12 @@ namespace NIPO.Views
 {
     public partial class NoteForm : MetroForm
     {
-        public NoteForm()
+        public NoteForm(DataTable model)
         {
             InitializeComponent();
+
+            bindingSource1.DataSource = model;
+            dataGridView1.DataSource = bindingSource1;
         }
     }
 }

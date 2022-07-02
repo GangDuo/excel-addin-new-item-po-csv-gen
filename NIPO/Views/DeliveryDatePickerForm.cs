@@ -7,16 +7,18 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using NIPO.Components.DataGridViewX;
 
 namespace NIPO.Views
 {
     public partial class DeliveryDatePickerForm : MetroForm
     {
-        public DeliveryDatePickerForm(IEnumerable<Models.DeliveryDatePicker> model)
+        public DeliveryDatePickerForm(IList<Models.DeliveryDatePicker> model)
         {
             InitializeComponent();
 
             bindingSource1.DataSource = model;
+            dataGridView1.Bind(model, true);
             dataGridView1.DataSource = bindingSource1;
         }
 

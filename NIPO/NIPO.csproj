@@ -173,6 +173,7 @@
   -->
   <ItemGroup>
     <Compile Include="Components\DataGridViewX\DataGridViewCalendarColumn.cs" />
+    <Compile Include="Components\DataGridViewX\DataGridViewExtensions.cs" />
     <Compile Include="Components\UIHintMappings.cs" />
     <Compile Include="CsvFile.cs" />
     <Compile Include="DataSource.cs" />

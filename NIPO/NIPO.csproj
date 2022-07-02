@@ -172,6 +172,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Components\DataGridViewX\DataGridViewCalendarColumn.cs" />
     <Compile Include="CsvFile.cs" />
     <Compile Include="DataSource.cs" />
     <Compile Include="Order.cs" />

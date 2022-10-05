@@ -35,7 +35,10 @@ namespace NIPO
                     continue;
                 }
                 var 物流入荷予定日付 = sheet.Cells[row, 33].Value;
-                var 掛計上日付 = 物流入荷予定日付;
+                int 伝票月 = (int)sheet.Cells[row, 35].Value;
+                int padding = 物流入荷予定日付.Month > 伝票月 ? 1 : 0;
+                var 伝票年月日 = new DateTime(物流入荷予定日付.Year + padding, 伝票月, 1);
+                var 掛計上日付 = 物流入荷予定日付.Month == 伝票年月日.Month ? 物流入荷予定日付 : 伝票年月日;
                 var 展開項目 = sheet.Cells[row, 38].Value;
                 uint 出荷確定数 = (uint)sheet.Cells[row, 19].Value;
                 oo.Add(new Order()

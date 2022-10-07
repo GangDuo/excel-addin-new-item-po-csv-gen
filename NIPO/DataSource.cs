@@ -23,7 +23,7 @@ namespace NIPO
 
             for (int row = TBODY_ROW; ; row++)
             {
-                var jan = sheet.Cells[row, JAN_COL].Value;
+                var jan = sheet.Cells[row, JAN_COL].Text;
                 if (jan == null || jan == "")
                 {
                     break;

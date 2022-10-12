@@ -10,6 +10,7 @@ namespace NIPO
         private const int HEADER_ROW = 11;
         private const int TBODY_ROW = 12;
         private const int JAN_COL = 16;
+        private readonly string 納入区分_DC申請 = "03";
 
         public IEnumerable<Order> ToList()
         {
@@ -49,7 +50,7 @@ namespace NIPO
                     掛計上日付 = 掛計上日付,
                     入力担当者 = 入力担当者,
                     担当者 = 担当者,
-                    店舗 = "9998",
+                    店舗 = 納入区分 == 納入区分_DC申請 ? String.Empty : "9998",
                     SKU = jan,
                     数量 = 出荷確定数,
                     展開項目 = 展開項目,
